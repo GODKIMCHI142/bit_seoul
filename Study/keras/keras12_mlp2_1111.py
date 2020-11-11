@@ -6,15 +6,20 @@ import numpy as np
 # y1 = np.array([range(101,201),range(711,811),range(100)])
 # print("x1.shape : ",x1.shape) # (3,100)
 
-x = np.array([range(1,101),range(311,411),range(100)])
-y = np.array([range(101,201),range(711,811),range(100)])
-print("x.shape : ",x.shape)  # (3,100)
+x = np.array([range(1,101),range(311,411),range(100)]) # (3,100)
+y = np.array(range(101,201)) # (100,)
+print("x.shape : ",x.shape) # (3,100)  
+print("y.shape : ",y.shape) # (100,)
+
 
 x = np.transpose(x) 
-y = np.transpose(y) 
+# y = np.transpose(y) 
+# y1 = w1x1 + w2x2 + w3x3 + b
 print("x.shape : ",x.shape) # (100,3)
-print("y.shape : ",y.shape) # (100,3)
+print("y.shape : ",y.shape) # (100,)
 
+
+# 슬라이싱
 # x_train = x[:60]
 # y_train = y[:60]
 # x_val = x[60:80]
@@ -27,7 +32,7 @@ print("y.shape : ",y.shape) # (100,3)
 # print(y_val.shape)
 # print(x_test.shape)
 # print(y_test.shape)
-# y1, y2, y3 = w1x1 + w2x2 + w3x3 + b
+
 
 # 2. 모델 구성
 from keras.models import Sequential
@@ -37,7 +42,7 @@ model = Sequential()
 model.add(Dense(10,input_dim=3))
 model.add(Dense(10))
 model.add(Dense(10))
-model.add(Dense(3))
+model.add(Dense(1))
 
 # 3. 컴파일 훈련
 
@@ -54,20 +59,20 @@ model.fit(x_train ,y_train, epochs=100, batch_size=1,validation_data=(x_val,y_va
 loss = model.evaluate(x_test,y_test)
 print("loss :",loss)
 
-x_test_predict = model.predict(x_test)
+y_test_predict = model.predict(x_test)
 print("y_test :",y_test)
-print("x_test_predict :",x_test_predict)
+print("y_test_predict :",y_test_predict)
 
 # RMSE 
 from sklearn.metrics import mean_squared_error
-def RMSE(y_test,x_test_predict):
-        return np.sqrt(mean_squared_error(y_test,x_test_predict))
-print("RMSE : ",RMSE(y_test,x_test_predict)) 
+def RMSE(y_test,y_test_predict):
+        return np.sqrt(mean_squared_error(y_test,y_test_predict))
+print("RMSE : ",RMSE(y_test,y_test_predict)) 
 
 
 # R2
 from sklearn.metrics import r2_score
-r2 = r2_score(y_test,x_test_predict)
+r2 = r2_score(y_test,y_test_predict)
 print("R2 : ",r2)
 
 

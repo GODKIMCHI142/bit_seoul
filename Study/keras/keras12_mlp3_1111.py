@@ -6,14 +6,16 @@ import numpy as np
 # y1 = np.array([range(101,201),range(711,811),range(100)])
 # print("x1.shape : ",x1.shape) # (3,100)
 
-x = np.array([range(1,101),range(311,411),range(100)])
-y = np.array([range(101,201),range(711,811),range(100)])
-print("x.shape : ",x.shape)  # (3,100)
+x = np.array(range(1,101)) # (100,)
+y = np.array([range(101,201),range(711,811),range(100)]) # (3,100)
+print("x.shape : ",x.shape) # (100,)  
+print("y.shape : ",y.shape) # (3,100)
 
-x = np.transpose(x) 
+
+# x = np.transpose(x) 
 y = np.transpose(y) 
-print("x.shape : ",x.shape) # (100,3)
-print("y.shape : ",y.shape) # (100,3)
+print("x.shape : ",x.shape) 
+print("y.shape : ",y.shape) 
 
 # x_train = x[:60]
 # y_train = y[:60]
@@ -34,7 +36,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 
 model = Sequential()
-model.add(Dense(10,input_dim=3))
+model.add(Dense(10,input_dim=1))
 model.add(Dense(10))
 model.add(Dense(10))
 model.add(Dense(3))

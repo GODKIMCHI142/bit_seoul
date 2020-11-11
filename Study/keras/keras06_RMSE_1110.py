@@ -54,14 +54,14 @@ print("loss : ",loss)
 # accuracy : 맞췄다 못맞췄다에 대한 값
 
 # 테스트값을 잘 예측했는지 평가해본다.
-y_predict = model.predict(x_test)
-print("y_predict : \n",y_predict)
+y_test_predict = model.predict(x_test)
+print("y_test_predict : \n",y_test_predict)
 
 
 # 실습 : 결과물 오차 수정. 미세조정
 
 from sklearn.metrics import mean_squared_error
 
-def RMSE(y_test,y_predict):
-        return np.sqrt(mean_squared_error(y_test,y_predict))
-print("RMSE : ",RMSE(y_test,y_predict))
+def RMSE(y_test,y_test_predict):
+        return np.sqrt(mean_squared_error(y_test,y_test_predict))
+print("RMSE : ",RMSE(y_test,y_test_predict))

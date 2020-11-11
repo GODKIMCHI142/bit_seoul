@@ -47,7 +47,7 @@ x_val, x_test , y_val  , y_test = train_test_split(x , y , test_size=0.5, shuffl
 
 
 model.compile(loss='mse', optimizer='adam', metrics='mae')
-model.fit(x_train ,y_train, epochs=100, batch_size=1,validation_data=(x_val,y_val))
+model.fit(x_train ,y_train, epochs=100, batch_size=1,validation_data=(x_val,y_val), verbose=111)
 
 
 # 4. 평가, 예측

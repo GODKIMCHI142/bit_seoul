@@ -1,4 +1,7 @@
 
+# 실습 train_test_split를 슬라이싱으로 바꿀것
+
+
 import numpy as np
 
 # 1. 데이터
@@ -15,18 +18,25 @@ y = np.transpose(y)
 print("x.shape : ",x.shape) # (100,3)
 print("y.shape : ",y.shape) # (100,3)
 
-# x_train = x[:60]
-# y_train = y[:60]
-# x_val = x[60:80]
-# y_val = y[60:80]
-# x_test = x[80:]
-# y_test = y[80:]
-# print(x_train.shape) 
-# print(y_train.shape)
-# print(x_val.shape) 
-# print(y_val.shape)
-# print(x_test.shape)
-# print(y_test.shape)
+print(x.__len__())
+len1 = int(x.__len__() * 6/10)   
+len2 = int(x.__len__() * 8/10)
+print(type(len1))
+
+# splice
+x_train = x[:len1]
+y_train = y[:len1]
+x_val = x[len1:len2]
+y_val = y[len1:len2]
+x_test = x[len2:]
+y_test = y[len2:]
+
+print(x_train.shape) 
+print(y_train.shape)
+print(x_val.shape) 
+print(y_val.shape)
+print(x_test.shape)
+print(y_test.shape)
 # y1, y2, y3 = w1x1 + w2x2 + w3x3 + b
 
 # 2. 모델 구성
@@ -34,16 +44,18 @@ from keras.models import Sequential
 from keras.layers import Dense
 
 model = Sequential()
-model.add(Dense(10,input_dim=3))
+# model.add(Dense(10,input_dim=3))
+model.add(Dense(10,input_shape=(3, )))
+# (100,10,3) : input_shape=(10,3)
 model.add(Dense(10))
 model.add(Dense(10))
 model.add(Dense(3))
 
 # 3. 컴파일 훈련
 
-from sklearn.model_selection import train_test_split
-x_train, x_test , y_train  , y_test = train_test_split(x , y , train_size=0.6, shuffle=True)
-x_val, x_test , y_val  , y_test = train_test_split(x , y , test_size=0.5, shuffle=True)
+# from sklearn.model_selection import train_test_split
+# x_train, x_test , y_train  , y_test = train_test_split(x , y , train_size=0.6, shuffle=True)
+# x_val, x_test , y_val  , y_test = train_test_split(x , y , test_size=0.5, shuffle=True)
 
 
 model.compile(loss='mse', optimizer='adam', metrics='mae')
@@ -54,20 +66,20 @@ model.fit(x_train ,y_train, epochs=100, batch_size=1,validation_data=(x_val,y_va
 loss = model.evaluate(x_test,y_test)
 print("loss :",loss)
 
-x_test_predict = model.predict(x_test)
+y_test_predict = model.predict(x_test)
 print("y_test :",y_test)
-print("x_test_predict :",x_test_predict)
+print("y_test_predict :",y_test_predict)
 
 # RMSE 
 from sklearn.metrics import mean_squared_error
-def RMSE(y_test,x_test_predict):
-        return np.sqrt(mean_squared_error(y_test,x_test_predict))
-print("RMSE : ",RMSE(y_test,x_test_predict)) 
+def RMSE(y_test,y_test_predict):
+        return np.sqrt(mean_squared_error(y_test,y_test_predict))
+print("RMSE : ",RMSE(y_test,y_test_predict)) 
 
 
 # R2
 from sklearn.metrics import r2_score
-r2 = r2_score(y_test,x_test_predict)
+r2 = r2_score(y_test,y_test_predict)
 print("R2 : ",r2)
 
 
