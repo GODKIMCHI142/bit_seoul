@@ -34,10 +34,10 @@ print("y1.shape : ",y1.shape)
 
 from sklearn.model_selection import train_test_split
 x1_train, x1_test , y1_train  , y1_test = train_test_split(x1 , y1 , train_size=0.6, shuffle=True)
-x1_val, x1_test , y1_val  , y1_test = train_test_split(x1_test , y1_test , test_size=0.5, shuffle=True)
+x1_val, x1_test , y1_val  , y1_test = train_test_split(x1_test , y1_test , test_size=0.5, shuffle=True,random_state=1)
 
 x2_train, x2_test , y1_train  , y1_test = train_test_split(x2 , y1 , train_size=0.6, shuffle=True)
-x2_val, x2_test , y1_val  , y1_test = train_test_split(x2_test , y1_test , test_size=0.5, shuffle=True)
+x2_val, x2_test , y1_val  , y1_test = train_test_split(x2_test , y1_test , test_size=0.5, shuffle=True,random_state=1)
 
 print("x1.shape : ",x1.shape)
 print("x2.shape : ",x2.shape)

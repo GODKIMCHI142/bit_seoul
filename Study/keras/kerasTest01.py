@@ -3,7 +3,7 @@ from keras.models import Sequential
 import numpy as np
 
 
-# input2 output1 함수모델
+# input 2 output 1 함수모델
 
 # 1. 데이터 준비
 x1 = np.array([range(100),range(101,201),range(301,401)])
@@ -31,28 +31,28 @@ from keras.layers import Input, concatenate
 
 # Model 1
 input1 = Input(shape=(3,))
-dense1_1 = Dense(5,activation='relu',name='dense1_1')(input1)
-dense1_2 = Dense(5,activation='relu',name='dense1_2')(dense1_1)
-dense1_3 = Dense(5,activation='relu',name='dense1_3')(dense1_2)
-output1= Dense(5,activation='relu',name="output1")(dense1_3)
+dense1_1 = Dense(10,activation='relu',name='dense1_1')(input1)
+dense1_2 = Dense(10,activation='relu',name='dense1_2')(dense1_1)
+dense1_3 = Dense(10,activation='relu',name='dense1_3')(dense1_2)
+output1  = Dense(10,activation='relu',name="output1")(dense1_3)
 
 # Model 2
 input2 = Input(shape=(3,))
-dense2_1 = Dense(5,activation='relu',name='dense2_1')(input2)
-dense2_2 = Dense(5,activation='relu',name='dense2_2')(dense2_1)
-dense2_3 = Dense(5,activation='relu',name='dense2_3')(dense2_2)
-output2 = Dense(5,activation='relu',name="output2")(dense2_3)
+dense2_1 = Dense(10,activation='relu',name='dense2_1')(input2)
+dense2_2 = Dense(10,activation='relu',name='dense2_2')(dense2_1)
+dense2_3 = Dense(10,activation='relu',name='dense2_3')(dense2_2)
+output2  = Dense(10,activation='relu',name="output2")(dense2_3)
 
 # merge
 merge1 = concatenate([output1,output2])
 
 # Middle 1
-middle1_1 = Dense(5,activation='relu',name='middle1_1')(merge1)
-middle1_2 = Dense(5,activation='relu',name='middle1_2')(middle1_1)
-middle1_3 = Dense(5,activation='relu',name='middle1_3')(middle1_2)
+middle1_1 = Dense(10,activation='relu',name='middle1_1')(merge1)
+middle1_2 = Dense(10,activation='relu',name='middle1_2')(middle1_1)
+middle1_3 = Dense(10,activation='relu',name='middle1_3')(middle1_2)
 
 # output
-output1_1 = Dense(5,activation='relu',name='output1_1')(middle1_3)
+output1_1 = Dense(10,activation='relu',name='output1_1')(middle1_3)
 output1_2 = Dense(3,activation='linear',name='output1_2')(output1_1)
 
 # 모델 정의
@@ -72,10 +72,19 @@ loss = model.evaluate(([x1_test,x2_test],[y1_test,y1_test]),batch_size=1)
 print("loss : ",loss)
 print("4")
 
+y_test_predict = model.predict([x1_test,x2_test])
+print("y_test_predict : ",y_test_predict)
 #RMSE
+from keras.metrics import mean_squared_error
+def RMSE (y_t,y_t_pred):
+    return np.sqrt(mean_squared_error(y_t,y_t_pred))
+print("RMSE : ",RMSE(y1_test,y_test_predict))
+
 
 #R2
-
+from sklearn.metrics import r2_score
+r2 = r2_score(y1_test,y_test_predict)
+print("r2 : ",r2)
 
 
 
