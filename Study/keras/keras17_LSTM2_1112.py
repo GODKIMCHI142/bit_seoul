@@ -6,7 +6,7 @@ y = np.array([4,5,6,7])                         # (4, )
 
 print("x.shape, y.shape : ",x.shape,y.shape)
 
-x = x.reshape(x.shape[0] , x.shape[1] , 1)
+x = x.reshape(x.shape[0] , x.shape[1] , 1) 
 # x = x.reshape(4,3,1)
 print("x.shape : ",x.shape)
 
@@ -16,6 +16,7 @@ x_train, x_test, y_train, y_test = train_test_split(x,y,train_size=0.75,shuffle=
 # 2. 모델 구성
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM
+
 model = Sequential()
 # model.add(LSTM(100,activation='relu',input_shape=(3,1)))
 model.add(LSTM(50,activation='relu',input_length=3,input_dim=1))

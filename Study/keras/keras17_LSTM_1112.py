@@ -18,7 +18,6 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM
 model = Sequential()
 model.add(LSTM(100,activation='relu',input_shape=(3,1)))
-# 30 -> LSTM에서 나가는 node의 개수
 model.add(Dense(20,activation='relu'))
 model.add(Dense(20,activation='relu'))
 model.add(Dense(20,activation='relu'))
