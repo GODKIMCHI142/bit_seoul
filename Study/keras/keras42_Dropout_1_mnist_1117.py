@@ -39,15 +39,24 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Conv2D
 from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Dropout
 
 model = Sequential()
 model.add(Conv2D(60,(2,2),padding='same',input_shape=(28,28,1))) # 28,28,60
+model.add(Dropout(0.2))
 model.add(Conv2D(50,(2,2),padding='valid'))                      # 27,27,50
+model.add(Dropout(0.2))
 model.add(Conv2D(40,(3,3)))                                      # 25,25,40
+model.add(Dropout(0.2))
 model.add(Conv2D(30,(2,2),strides=2))                            # 12,12,30
+model.add(Dropout(0.2))
 model.add(MaxPooling2D(pool_size=2))   # pool_size default : 2   # 6 ,6 ,30
+model.add(Dropout(0.2))
 model.add(Flatten())                                             # 1080,
+model.add(Dense(30,activation='relu'))                           # 20,
+model.add(Dropout(0.2))
 model.add(Dense(20,activation='relu'))                           # 20,
+model.add(Dropout(0.2))
 model.add(Dense(10,activation='softmax'))                        # 10,
 
 model.summary()
@@ -66,7 +75,7 @@ tb = TensorBoard(log_dir='graph',histogram_freq=0, write_graph=True, write_image
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 # fit
-model.fit(x_train,y_train, epochs=10000,batch_size=32,verbose=1,
+model.fit(x_train,y_train, epochs=30,batch_size=32,verbose=1,
           validation_split=0.2,callbacks=[es,tb])
 
 # 4. 평가, 예측
@@ -93,7 +102,4 @@ print("ytp_recovery : ",ytp_recovery)
 # y_real = np.argmax([y_pred],axis=1).reshape(-1,1)
 y_real = np.argmax(y_pred,axis=1).reshape(10)
 print("실제값 : \n",y_real)
-
-
-
 
