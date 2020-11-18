@@ -45,7 +45,7 @@ model.save("./save/keras49_mcp_8_B_M_1118.h5")
 
 # ES
 from tensorflow.keras.callbacks import EarlyStopping
-es = EarlyStopping(monitor='loss',patience=5, mode='auto')
+es = EarlyStopping(monitor='loss',patience=100, mode='auto')
 
 # ModelCheckPoint
 from tensorflow.keras.callbacks import ModelCheckpoint
