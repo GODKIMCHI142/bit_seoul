@@ -1,11 +1,9 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from tensorflow.keras.datasets import cifar10
 
-
-
-
-(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+x_train = np.load("./data/cifar10_x_train.npy")
+x_test  = np.load("./data/cifar10_x_test.npy")
+y_train = np.load("./data/cifar10_y_train.npy")
+y_test  = np.load("./data/cifar10_y_test.npy")
 
 print(x_train.shape,x_test.shape) # (50000, 32, 32,3) (10000, 32, 32,3)
 print(y_train.shape,y_test.shape) # (50000,1) (10000,1)
@@ -50,8 +48,3 @@ model3 =  load_model("./model/keras49_mcp_2_MCP_1118-06-1.0833.hdf5")
 result3 = model3.evaluate(x_test,y_test,batch_size=32)
 print("model3.loss : ",result3[0])
 print("model3.accuracy : ",result3[1],"\n")
-
-
-
-
-

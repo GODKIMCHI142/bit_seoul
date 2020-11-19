@@ -70,7 +70,7 @@ print(x_train.shape)
 print(x_test.shape)
 print(y_train.shape)
 print(y_test.shape)
-'''
+
 # 3. 컴파일, 훈련
 
 # ES
@@ -126,5 +126,5 @@ print("실제값 :",y_real)
 # 예측값 : [3 8 8 0 6 6 1 6 3 1]
 # 실제값 : [3 8 8 0 6 6 1 6 3 1]
 
-'''
+
 
