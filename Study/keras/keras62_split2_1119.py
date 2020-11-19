@@ -20,11 +20,12 @@ print(type(dataset))
 dataset = dataset.values
 size = 5
 
-# (150,4)를 받아서 size행씩 잘라서 다시 만든다.
+# (150,5)를 받아서 size행씩 잘라서 다시 만든다.
 def new_split (r_data,r_size):
     new_data = []
     for i in range(len(r_data)-(r_size-1)) : 
         new_data.append(r_data[i:i+size])
+    # (146,5,5)
     return np.array(new_data)
 
 data2 = new_split(dataset,size)
