@@ -116,39 +116,39 @@ model.summary()
 
 
 model.compile(loss='mse', optimizer='adam', metrics='mse')
-model.fit([x1_train],[y1_train,y2_train,y3_train], epochs=100, 
+model.fit([x1_train],[y1_train,y2_train,y3_train], epochs=1, 
         #    batch_size=1,validation_data=([x1_val,x2_val],[y1_val,y1_val]))
         batch_size=1,validation_data=([x1_val,x1_val,x1_val],[y1_val,y2_val,y3_val]))
 
 
 # 4. 평가, 예측
-result = model.evaluate(([x1_test,x1_test,x1_test]),([y1_test,y2_test,y3_test]),batch_size=1)
+result = model.evaluate(([x1_test]),([y1_test]),batch_size=1)
 print("result :",result)
 
-y1_test_predict, y2_test_predict, y3_test_predict = model.predict(x1_test)
+y1_test_predict = model.predict(x1_test)
 print("y1_test_predict :",y1_test_predict)
-print("y2_test_predict :",y2_test_predict)
-print("y3_test_predict :",y3_test_predict)
+# print("y2_test_predict :",y2_test_predict)
+# print("y3_test_predict :",y3_test_predict)
 
 
 
-# RMSE 
-from sklearn.metrics import mean_squared_error
-def RMSE(y_test_R,y_test_predict_R):
-        y_t     = y_test_R
-        y_t_pre = y_test_predict_R
-        return np.sqrt(mean_squared_error(y_t,y_t_pre))
-print("RMSE y1 : ",RMSE(y1_test,y1_test_predict)) 
-print("RMSE y2 : ",RMSE(y2_test,y2_test_predict)) 
-print("RMSE y3 : ",RMSE(y3_test,y3_test_predict)) 
+# # RMSE 
+# from sklearn.metrics import mean_squared_error
+# def RMSE(y_test_R,y_test_predict_R):
+#         y_t     = y_test_R
+#         y_t_pre = y_test_predict_R
+#         return np.sqrt(mean_squared_error(y_t,y_t_pre))
+# print("RMSE y1 : ",RMSE(y1_test,y1_test_predict)) 
+# print("RMSE y2 : ",RMSE(y2_test,y2_test_predict)) 
+# print("RMSE y3 : ",RMSE(y3_test,y3_test_predict)) 
 
-# R2
-from sklearn.metrics import r2_score
-# r2 = r2_score(y_test,x_test_predict)
+# # R2
+# from sklearn.metrics import r2_score
+# # r2 = r2_score(y_test,x_test_predict)
 
-print("R2 y1 : ",r2_score(y1_test,y1_test_predict))
-print("R2 y2 : ",r2_score(y2_test,y2_test_predict))
-print("R2 y3 : ",r2_score(y3_test,y3_test_predict))
+# print("R2 y1 : ",r2_score(y1_test,y1_test_predict))
+# print("R2 y2 : ",r2_score(y2_test,y2_test_predict))
+# print("R2 y3 : ",r2_score(y3_test,y3_test_predict))
 
 
 # # x_len = x.__len__()

@@ -20,12 +20,11 @@ print(type(dataset))
 dataset = dataset.values
 size = 5
 
-# (150,5)를 받아서 size행씩 잘라서 다시 만든다.
+# (150,4)를 받아서 size행씩 잘라서 다시 만든다.
 def new_split (r_data,r_size):
     new_data = []
     for i in range(len(r_data)-(r_size-1)) : 
         new_data.append(r_data[i:i+size])
-    # (146,5,5)
     return np.array(new_data)
 
 data2 = new_split(dataset,size)
@@ -72,6 +71,24 @@ print(type(data3))
 # print(new_x)
 # print("new_x.shape >>> ",new_x.shape)
 
+dataset = np.array(range(1,11)) # 1~10 
+size = 5                        # 원하는 열의 길이
+print("dataset : >>> \n",dataset) # [ 1  2  3  4  5  6  7  8  9 10]
+print("len(dataset) : >>> \n",len(dataset)) # 10
+
+def split_x(seq, size):                        # 함수선언
+    aaa = []                                   # 빈 리스트를 만듬
+    for i in range(len(seq) - size +1):        # for문이 도는 횟수는 dataset의 길이 - 열의 길이 + 1
+        subset = seq[i : (i+size)]             # 인덱스 i ~ i+5까지 리스트로 뽑고 1만큼 순차적으로 증가한다
+        aaa.append([item for item in subset])  # subset안에서 가져온 데이터를 aaa에 넣는다
+    print("type(aaa) : >>> \n",type(aaa))      # aaa의 타입을 출력해본다.                  
+    return np.array(aaa)                       # aaa를 numpy.ndarray 타입으로 바꾼다.
+
+
+datasets = split_x(dataset, size) # 함수를 호출하고 dataset과 size를 넘겨준뒤 새로운 리스트를 리턴받는다.
+print("=================")
+print("datasets : >>>> \n",datasets)
+print("type(datasets) : >>>> \n",type(datasets))
 
 
 
