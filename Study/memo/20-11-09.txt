@@ -1,0 +1,87 @@
+- 과제
+1. //kaggle 아이디만들기
+2. //Dacon 아이디만들기
+3. //git Hub -> bit_seoul -> 잔디심기
+4. 다운로드 및 스크린샷
+5. acc 1.0으로 만들기
+
+
+
+conda env list : 가상환경 확인 명령어(cmd)
+
+Kaggle : 캐글은 2010년 설립된 예측모델 및 분석 대회 플랫폼이다. 
+
+pip install tensorflow-gpu==2.3.0 : 텐서플로우 GPU버전 설치 명령어 , 다른 API도 함께 설치됨
+
+import tensorflow as tf -> visual studio 설치가 필요함
+
+tf는 백엔드에서 돌아감.
+tf1.0 어려움 -> keras사용 -> tf2.0안에 keras 들어감
+pip install keras==2.4.3 : install keras
+
+VS Code - install - Python, Python Extended, Python Extension Pack, Python for VSCode 
+              
+numpy : 리스트간의 데이터들을 서로 더하기 할 수 있게 해줌
+ex)
+     x = np.array([1,2,3]) # numpy를 이용한 리스트 행렬을 만든다.
+     y = np.array([4,5,6])
+     # array : 행렬
+     print(x+y) # [5 7 9]
+
+layer : 층(신경망에서 한 층)
+node : layer을 구성하는 각각의 구조체
+parameter : node를 연결하는 선
+modeling : 신경망을 구성하는 일
+loss/cost : 예측과 실제 데이터 사이의 간극
+
+미분 : y=ax^2+bx+C -> y=2ax+b -> Ax+b
+y = ax + b 
+a : weight : 가중치
+
+머신에게 정제된 데이터 x와 y를 넣어준다 
+	-> 최소의 loss/cost를 구한다 
+	-> 최적의 W값을 구한다. 
+	-> 이후 x값만 넣어서 최적의 W값을 가지고 y값을 구한다
+
+             O                                from tensorflow.keras.models import Sequential                                
+         o   o   o                           from tensorflow.keras.layers import Dense
+     o  o  o  o  o  o     -> DEEP  ->  model = Sequential()
+         o   o   o                           model.add(Dense(3, input_dim=1)) 
+             X                                 model.add(Dense(5))
+    				model.add(Dense(3))
+     				model.add(Dense(1))
+
+머신러닝 순서
+1. 데이터준비
+2. 모델구성
+3. 컴파일, 훈련
+4. 평가, 예측
+
+
+하이퍼 파라미터 튜닝 : 노드와 레이어 구성을 튜닝하는것, 
+                             loss , opti, metrics 구성변경 
+
+loss : 훈련 손실값
+acc : 훈련정확도
+val_loss : 검증 손실값
+val_acc : 검증 정확도
+
+relu : 은닉 층으로 학습 'relu' 는 은닉층으로 역전파를 통해 
+       좋은 성능이 나오기 때문에 마지막 층이 아니고서야 거의 relu 를 이용한다.
+sigmond : yes or no 와 같은 이진 분류 문제
+softmax : 확률 값을 이용해 다양한 클래스를 분류하기 위한 문제
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

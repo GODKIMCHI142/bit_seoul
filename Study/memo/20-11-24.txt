@@ -1,0 +1,194 @@
+- 과제
+- 실습
+
+# Cross Validation(CV)
+	: 교차검증
+
+
+# K-Fold
+	: from sklearn.model_selection import KFold
+	: kfold = KFold(n_splits=5,shuffle=True)
+	: train 데이터에서 5조각을 내고 그것들을 섞어서 하겠다.
+
+
+# cross val score
+	: from sklearn.model_selection import cross_val_score
+	: scores = cross_val_score(model,x_train,y_train,cv=kfold)
+	: 각 분할마다 정확도를 측정한다.
+
+# warnings
+	: import warnings
+	: warnings.filterwarnings('ignore')
+		: 터미널에 표시되는 warnings 무시하겠다.
+
+
+
+ 하이퍼 파라미터 튜닝
+
+# GridSearchCV
+	: 내가 쓰고싶은 파라미터를 전부 넣고 돌려!
+	: from sklearn.model_selection import GridSearchCV
+	: model = GridSearchCV(SVC(), parameters, cv=kfold)
+	: estimator 
+		: classifier, regressor, pipeline이 사용될 수 있다.
+	: param_grid 
+		: 파라미터 딕셔너리. (파라미터명과 사용될 여러 파라미터 값을 지정)
+	: scoring 
+		: 예측 성능을 측정할 평가 방법. 
+		: 보통은 사이킷런에서 제공하는 문자열 (예: ‘accuracy’)을 넣지만 
+		  별도의 함수도 직접 지정이 가능하다.
+	: 파라미터의 모든경우의 수를 계산해보고 
+                최적의 파라미터를 찾아준다.
+	: 교차검증도 해준다
+
+
+SVC() : C, 커널, 감마 라는 파라미터가 있다. 
+
+# best_estimator_
+	: model.best_estimator_
+	: 최적의 estimator를 	보여준다.
+                
+# best_params_
+	: model.best_params_
+	: 현재 명시해준 파라미터들 중 최적의 값을 보여준다.
+
+# 부트스트래핑 샘플링 
+	: 전체 데이터에서 일부 데이터의 중첩을 허용하는 방식
+
+
+# RandomizedSearchCV
+	: GridSearchCV + Random
+	: low와 high를 이용하여 한계를 정해주면
+	  그 값들 사이에서 랜덤하게 파라미터값을 탐색함.
+	: n_iter
+		: 몇번 반복하여 수행할 것인지 
+	: cv * n_iter = 총 횟수
+
+
+# pipeline
+	: from sklearn.pipeline import Pipeline
+	: from sklearn.pipeline import make_pipeline
+	: cv -> train, val -> val은 빼고 train만 fit(scaling) -> 과적합을 줄일수있다. 
+	: (스케일러 + 머신러닝모델) 구성된다.
+
+# make_pipeline
+	: pipe = make_pipeline(MinMaxScaler(), SVC())
+
+# Pipeline
+	: pipe = Pipeline([("scaler",MinMaxScaler()), ("svm",SVC())])
+
+	: pipe.fit(x_train,y_train)
+	: pipe.score(x_test,y_test)
+		: 모델로 test를 돌렸을때 acc
+
+	: pipe = make_pipeline(MinMaxScaler(), SVC())
+	: model = RandomizedSearchCV(pipe,parameters,cv=5)
+	: model.fit(x_train,y_train)
+	
+
+# decisionTree
+	: 트리구조
+	: 분류, 회귀 구분없이 사용된다.
+	: from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
+	: Root Node : 첫 노드, 시작점
+	: Intermediate node : 중간노드
+	: Terminal Node 혹은 Leaf Node : 결정값, 마지막노드
+	: model.feature_importances_
+		: 컬럼(피쳐,특성)의 중요도
+		: min_samples_split
+		: 노드를 분할하기 위한 최소한의 샘플 데이터수
+		: 작게 설정할 수록 분할 노드가 많아져 과적합 가능성 증가
+		: 과적합을 제어하는데 사용
+	: min_samples_leaf
+		: 리프노드가 되기 위해 필요한 최소한의 샘플 데이터수
+		: 과적합 제어 용도
+		: 불균형 데이터의 경우 특정 클래스의 데이터가 
+		  극도로 작을 수 있으므로 작게 설정 필요
+	: max_features
+		: 최적의 분할을 위해 고려할 최대 feature 개수
+		: int형으로 지정 →피처 갯수 / float형으로 지정 →비중
+		: sqrt 또는 auto : 전체 피처 중 √(피처개수) 만큼 선정
+		: log : 전체 피처 중 log2(전체 피처 개수) 만큼 선정
+	: max_depth
+		: 트리의 최대 깊이
+		: 완벽하게 클래스 값이 결정될 때 까지 분할
+		: 또는 데이터 개수가 min_samples_split보다 작아질 때까지 분할
+		: 깊이가 깊어지면 과적합될 수 있으므로 적절히 제어 필요
+	: max_leaf_nodes
+		: 리프노드의 최대 개수
+
+# RandomForest
+	: 배깅 방식
+	: ensemble(앙상블) machine learning 모델
+	: 여러개의 decision tree를 형성하고 
+	  새로운 데이터 포인트를 각 트리에 동시에 통과시키며, 
+	  각 트리가 분류한 결과에서 투표를 실시하여 
+	  가장 많이 득표한 결과를 최종 분류 결과로 선택합니다. 
+	: 데이터 뿐만아니라 피쳐도 부분집합을 활용한다.
+
+
+# GradientBoostingClassifier
+	: 여러 개의 decision tree를 묶어 강력한 model을 만드는 ensemble기법
+	: 무작위성이 없어 powerful한 pre-pruning이 사용
+	: 1~5 정도 깊이의 tree를 사용하므로 메모리를 적게 사용하고 예측도 빠름
+	: 얕은 트리들을 계속해서 연결해나가는 것
+	: learning_rate
+		: 이전 트리의 오차를 얼마나 강하게 보정할 것인가를 제어
+		: rate를 높이면 보정을 강하게 하기 때문에 복잡한 모델을 만듬
+	: n_estimator 값을 키우면 ensemble에 트리가 더 많이 추가되어 
+                모델의 복잡도가 커지고 train 세트를 더 정확하게 fitting
+# XGB
+	: pip install xgboost ->  cmd에서 설치
+	: Gradient Boosting 알고리즘을 분산환경에서도 실행할 수 있도록 
+                구현해놓은 라이브러리이다
+	: Regression, Classification 문제를 모두 지원
+	: Gradient Boost가 병렬 학습이 지원되도록 구현한 라이브러리
+
+# Bagging
+	: 트리를 만들 때 training set의 부분집합을 활용하여 형성하는 것
+	: 임의로 선택할 때 한가지 중요한 것은 바로 중복을 허용한다는 것
+
+
+# Boosting 
+: m1~3 모델이 있을때, m1에는 x에서 샘플링된 데이터를 넣는다. 
+: 나온 결과중 예측이 잘못된 x중의 값들에 가중치를 반영해서 다음 모델인 m2에 넣는다.  
+: 마찬가지로 y2 결과에서 예측이 잘못된 x’에 값들에 가중치를 반영해서 m3에 넣는다. 
+: 그리고, 각 모델의 성능이 다르기 때문에, 각 모델에 가중치 W를 반영한다.
+
+
+
+n_estimators
+	: 결정트리의 갯수를 지정
+n_jobs
+	: cpu코어 병렬 활용 수
+	: -1 : 모든 코어
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,87 @@
+- 과제
+	: pandas, numpy 공부
+- 실습
+
+# 파일명 뽑아보기
+	: 경로까지 다뽑기
+		: import os 
+		  filepath os.path.abspath( __file__ )
+	: 경로는 제외하고 확장자 까지 뽑기
+		: import sys   
+		  filename = sys._getframe().f_code.co_filename
+	: '.' 으로 구분하여 확장자 제외하기
+		: from os.path import basename
+		  rName = basename(filename).split('.')
+
+# CSV
+
+# numpy data
+	: numpy 상태의 데이터만 받는다
+	: save
+		: np.save("./data/iris_x.npy", arr=x_data)
+		: 경로/파일명.npy로 경로와 파일명을 지정해주고 
+		: arr=** 로 들어갈 데이터를 지정해준다
+	: load
+		: x_train = np.load("./data/mnist_x_train.npy")
+	: npy로 저장한것이 불러올 때 더 빠르다.
+	: 저장할 때 shape이 유지되어 저장된다.
+	: pandas.values 
+		: pandas데이터를 npy데이터로 변환
+	: pandas.to_numpy() 
+		: pandas데이터를 npy데이터로 변환
+	: np.loadtxt("./data/csv/iris_ys2_pd.csv", delimiter=',') 
+		: csv를 npy로 불러오기
+		: delimiter : 구분자
+	
+
+
+
+# Pandas data
+	: 여러가지 형태의 데이터를 받을 수 있다.
+	: import pandas as pd
+	: header, inex_col이 있다.
+	: datasets = pd.read_csv("./data/csv/iris_ys.csv",
+                                            header=0,index_col=0,sep=",")
+		: csv파일을 pandas형식으로 읽겠다.
+		: header=* : 컬럼 이름지정하기
+			    이름이 없으면 header=None, 있으면 header=0
+		: index_col=* : index 지정해주기 
+			       index 없으면 None, 있으면 0
+		: sep=** : 구분자
+		: names=** : 컬럼이름부여하기, 
+	: datasets.head()
+		: 위 5개 행을 보여준다.
+ 	: datasets.tail()
+		: 아래 5개 행을 보여준다.
+	: datasets.values 
+		: pandas데이터를 npy데이터로 변환
+	: datasets.to_numpy() 
+		: pandas데이터를 npy데이터로 변환
+	: pd.DataFrame(np.array)
+		: npy데이터를 panda로 변환
+	: pd_datasets.to_csv(filepath,index=False,header=False)
+		: padans 데이터를 csv로 저장
+		: 저장할 때 index를 만들지 않음
+		: 저장할 때 header를 만들지 않음
+	: data2 = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16],[17,18,19,20]] # 5,4
+	: df2 = pd.DataFrame(data2, index=['A','B','C','D','E'], columns=['가','나','다','라'])
+		: indes=** : index를 지정해준다
+		: columns=** : 컬럼명을 지정해준다.
+	: loc 
+		: 이름으로 위치를 찾는다
+		: 행은 필수이다.
+	: iloc
+		: 인덱스로 위치를 찾는다.
+		: 행은 필수이다.
+
+# Conv1D
+	: 3차원
+	: input_shape : 2차원
+	: 순차데이터에 사용된다.
+
+
+
+
+
+
+

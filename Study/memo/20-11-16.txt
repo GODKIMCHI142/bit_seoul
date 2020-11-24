@@ -1,0 +1,197 @@
+- 과제
+ 
+- 실습1
+	: test데이터를 10개 가져와서 predict 만들것
+	: 원한인코딩을 원복할 것
+	: print('실제값 : ', ~~) # 결과 : [3,4,5,6,7,8,9,10]
+	: print('예측값 : ', ~~) # 결과 : [3,4,5,6,7,8,9,10]
+- 결과 1 
+	: x_pred = x_test[0:10]
+	  y_test_predict = model.predict([x_pred])
+	: ytp_recovery = np.argmax(y_test_predict,axis=1).reshape(10)
+	: 예측값 :  [7 2 1 0 4 1 4 9 5 9]
+	: 실제값 :  [7 2 1 0 4 1 4 9 5 9]
+
+- 실습2
+	: earlystopping, tensorboard도 넣을것
+- 결과2
+	: 완료
+
+# CNN
+	: Convolutional Neural Network 
+	: 합성곱신경망
+	: 4차원
+	: 이미지개수 * 가로 * 세로 * 채널
+	: 주로 이미지데이터를 사용한다. 다른곳에도 사용가능
+	: 조각조각 잘라서 특성값을 찾아낸다. -> 연산
+	: from tensorflow.keras.layers import Conv2D
+	: shape : batch_size, rows, cols, channels
+	: input_shape = (rows, cols, channels)
+
+관련 : https://excelsior-cjh.tistory.com/180
+
+ex) model.add(Conv2D( 10 , (2,2) , padding='valid' , input_shape=(5,5,1)))
+
+# 다중 클래스 분류(Multi-class Classification) 
+	: 세 개 이상의 선택지 중 하나를 고르는 문제	
+	: 원핫인코딩을 해야한다. 
+	: 마지막 Dense에는 activation='softmax' 를 사용한다.
+	: 컴파일 할 때 loss = categorical_crossentropy 를 해준다
+
+# Conv2D
+	: from tensorflow.keras.layers import Conv2D
+	: CNN을 사용하기 위한 여러 layer중 하나
+	: 인풋과 아웃풋의 차원은 같다. => Flatten을 사용
+	: param : (입력채널 x 필터폭 x 필터 높이 + bias) x 출력 채널수
+	: padding = 'valid'
+		: RowSize : (row-kernel_size)/stride + 1 
+		: ColumnSize : (col-kernel_size)/stide + 1
+
+filters 또는 kernel
+	: 출력 공간의 치수(즉, 컨볼루션의 출력 필터 수)
+	  ex) 10
+
+input_shape
+	: Rows : 가로
+	: Columns : 세로
+	: Channels 
+		: 이미지색 
+		: 컬러 : 3개의 채널 :Red, Green, Blue
+		: 흑백 : 1개의 채널
+
+kernel_size 
+	: default : None
+	: 2D 콘볼루션 창의 높이와 폭을 지정하는 2개의 정수의 정수 또는 튜플/list. 
+              모든 공간 차원에 대해 동일한 값을 지정하려면 단일 정수가 될 수 있다.
+	: 창의 크기
+              ex) : (2,2) == 2
+
+strides 
+	: default : 1
+	: 높이와 너비를 따라 콘볼루션의 장단을 지정하는 2정수의 정수 또는 튜플/list. 
+              모든 공간 차원에 대해 동일한 값을 지정하려면 단일 정수가 될 수 있다. 
+              stride 값 != 1을 지정하는 것은 delta_rate 값 != 1을 지정하는 것과 
+              호환되지 않는다.
+	: 창을 움직이는 칸수
+	: ex) : (2,2) == 2
+
+padding 
+	: default : valid
+	: "유효한" 또는 "동일한" 중 하나(대소문자 구분).
+              경계 처리 방법을 정의합니다.
+              ‘valid’ : 유효한 영역만 출력이 됩니다. 
+              따라서 출력 이미지 사이즈는 입력 사이즈보다 작습니다.
+              ‘same’ : 출력 이미지 사이즈가 입력 이미지 사이즈와 동일합니다.
+	: 데이터 바깥부분에 패딩을 씌워서 가장자리의 데이터들이 유실되지않게 해줌
+	: padding='same' 
+		: 5,5 shape인 데이터 -> (2,2) strides =1 일때
+		: 4,4 ->  5,5 shape으로 만들어줌
+	: padding = 'valid'
+		: 유효한 영역만 출력이 됩니다. 
+		: 따라서 출력 이미지 사이즈는 입력 사이즈보다 작습니다.
+
+
+ex) model.add(Conv2D( 10 , (2,2), input_shape=(5,5,1))) 를 통과하면 (4,4,10) 이 된다
+     model.add(Conv2D( 5 , (2,2))) 를 통과하면 (3,3,5)가 된다
+
+# Pooling 
+	: 합성곱에 의해 얻어진 Feature map으로부터 값을 
+	  샘플링해서 정보를 압축하는 과정을 의미합니다.
+
+
+# Maxpooling2D 
+	: from tensorflow.keras.layers import MaxPooling2D 
+	: 중복하지 않고 잘라서 특성치의 최대값만 구하는 기법
+	: 특정 영역에서 가장 큰 값을 샘플링하는 풀링 방식         
+	: param : 0
+	: Rowsize : row/filtersize(row)
+	: ColumnSize : (col,channel)/stide + 1
+
+
+# Flatten 
+	: from tensorflow.keras.layers import Flatten
+	: 다차원 배열을 1차원 배열로 만든다.
+            : conv2D나 MaxPooling2D 같은 다차원 배열에서 
+              Dense layer로 넘겨 연산해야 할 때에 사용된다.
+            : param : 0
+            : ColumnSize : row * col * channels = x  => (x , )
+
+
+# MNIST 
+	: Modified National Institute of Standards and Technology  
+	: NIST의 손으로 쓴 글자 데이터셋에서 숫자만 따로 뽑아낸 데이터셋이다.
+	: 명암을 0 ~ 255 사이의 데이터로 집어넣었다.  
+	: from tensorflow.keras.datasets import mnist
+	: 데이터 불러오기
+		: (x_train, y_train), (x_test, y_test) = mnist.load_data()           
+
+# One Hot Encoding 
+	: 단 하나의 값만 True이고 나머지는 모두 False인 인코딩을 말한다.
+	: ex) [0, 0, 0, 0, 1]
+            : from tensorflow.keras.utils import to_categorical
+            : from sklearn.preprocessing import OneHotEncoder
+            : 범주형 데이터를 직접 연산할 수 없기 때문에 보다 쉽게 표현하기 위해 사용함 
+	  (ex.개 고양이 말)
+ex) 1 : 10000
+     2 : 01000
+     3 : 00100
+     4 : 00010
+     5 : 00001 -> 이런식으로 원핫인코딩           
+              
+# to_categorical()
+	: from tensorflow.keras.utils import to_categorical
+	: 원핫인코딩을 적용시키기 위한 함수
+	: y_train = to_categorical(y_train) 
+	=> [0. 0. 0. 0. 0. 1. 0. 0. 0. 0.] 이런식으로 변환
+
+# astype() 
+	: 모든 열의 데이터 타입을 변경
+	: x_train = x_train.reshape(60000, 28, 28, 1).astype('float32')/255.
+	=> astype() 사용하여 minmaxScaler를 대체하는 모습
+	: 머신이 부동소수점 계산에 강하기 때문에 float로 한 모양
+
+# softmax function(activation)
+	: 입력받은 값을 출력으로 0~1사이의 값으로 
+	  모두 정규화하며 출력 값들의 총합은 항상 1이 되는 특성을 가진 함수이다.
+            : K개의 값이 존재할 때 각각의 값의 편차를 확대시켜 
+	  큰 값은 상대적으로 더 크게, 작은 값은 상대적으로 더 작게 만든 다음 
+	  normalization 시키는 함수다
+	: 결국 one_hot_encoding과 상관관계가 있다.
+
+# argmax()
+	: y_real = np.argmax(y_pred,axis=1).reshape(10)
+	: softmax를 통하여 나온값들 중 가장큰값은 1 나머지는 0을 만들고
+	  이것을 원핫인코딩값과 비교한다.
+	: 원핫인코딩을 디코딩한다고 생각하면된다.
+
+# categorical_crossentropy
+	: loss="categorical_crossentropy"
+	: 다중 분류 손실함수
+	: one-hot encoding 클래스
+	: 출력 값이 one-hot encoding된 결과로 나온다.
+	->  label(y)을 one-hot encoding해서 넣어줘야 함
+	: ex)
+	-> Dense(3, activation='softmax') 라면
+	-> 3개의 각각 positive 확률값이 나온다
+	-> [0.2, 0.3, 0.5]
+	-> 위 출력값과 실제값 차이의 오차값을 계산한다.
+
+CNN
+	: default activation = None
+LSTM 
+	: default activation = 'tanh'
+	  입력신호를 (−1,1) 사이의 값으로 normalization 해준다.
+
+# Matplotlib
+	: import matplotlib.pyplot as plt
+	: 차트나 플롯(Plot)으로 그려주는 라이브러리 패키지
+	: plt.imshow() : 사진데이터를 직접보여준다.
+	  plt.show()
+
+
+
+
+
+
+
+

@@ -1,0 +1,61 @@
+- 과제
+- 실습
+	: keras39 CNN DNN LSTM 만들기
+
+
+# 다중분류
+
+# CIFAR-10 dataset (Canadian Institute for Advanced Research)
+	: from tensorflow.keras.datasets import cifar10
+	: 32 * 32 * 3
+	: (50000, 32, 32,3) (10000, 32, 32,3)
+	: 비행기, 자동차, 새, 고양이, 사슴, 개, 개구리, 말, 배, 트럭 각 6000개 씩
+
+# CIFAR-100 
+	: from tensorflow.keras.datasets import cifar100
+	: 32 * 32 * 3
+	: (50000, 32, 32,3) (10000, 32, 32,3)
+	: 100개 클래스 각 500개씩
+
+
+# fasion_mnit
+	: 10개의 범주(category)와 70,000개의 흑백 이미지
+	: (60000 * 28 * 28), (10000 * 28 * 28,) 
+	: (60000,) , (10000,)
+
+
+# Dropout
+	: from tensorflow.keras.layers import Dropout
+	: 레이어에 있는 노드를 일정비율 만큼 제거하는 것
+	: ex) Dropout(0.5) 
+	: 가중치 저장을 할 때는 dropout을 안한 가중치를 가져온다.
+	: 하이퍼파라미터 튜닝방법 중 하나이다.
+
+
+# load_boston
+	: 보스턴의 집값을 예측하는 회귀모델
+	: from sklearn.datasets import load_boston
+	: 14개 컬럼
+	: dataset = load_boston()
+	: x = dataset.data
+	: y = dataset.target
+
+
+# load_diabetes
+	: from sklearn.datasets import load_diabetes
+
+
+
+
+
+from tensorflow.keras.layers import Dropout
+
+
+
+
+
+
+
+
+
+

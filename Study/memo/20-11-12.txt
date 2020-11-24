@@ -1,0 +1,77 @@
+- 과제
+
+
+# RNN : Recurrent Neual Network : 순환신경망
+          : ‘기억’(다른 말로 hidden state)을 갖고 있다는 점 
+          : 순차적 -> Time Series -> 시계열
+          : 고정된 크기의 데이터를 다루는데 유리하다.
+
+# 시계열 데이터 : 데이터 관측치가 시간적 순서를 가진 데이터이다.
+                     : 불규칙한 데이터는 다루지 않는다.
+  
+# LSTM : Long Short-Term Memory
+          : 긴 시퀀스를 기억할 수 있는 LSTM 레이어
+          : 순환 신경망 구조(RNN)의 한 모델
+          : 한번에 하는 작업량을 정해준다.
+          : LSTM이 받는 데이터는 3차원 이어야한다.
+          : 행 * 열 * 작업량
+          : input_shape = (열,작업량)
+          : 시계열 데이터는 최근데이터가 많은 영향을 미치기때문에 
+            LSTM은 최신데이터에 영향을 더 받는다.
+
+          : Forget Gate         : 과거 정보를 버릴지 말지 결정하는 과정
+          : Input Gate           : 현재 정보를 저장할지 결정하는 과정
+          : Update (cell state) : 과거 cell state(Ct-1)를 새로운 state(Ct)로 업데이트 하는 과정 
+          : Output Gate (hidden state) : 어떤 출력값을 출력할지 결정하는 과정
+          : 4개의 gate(layer)를 통해 계산을 하고 회귀하여 한번 더 한다.
+
+
+          : model.add(LSTM(30,activation='relu',input_shape=(3,1)))
+          : layer 한층에 4개의 layer가 있다
+          : 계산법 : 4(layer)(작업량 + 1(bias) + node의 개수) * node의 개수
+          
+          : model.add(LSTM(10,activation='relu',input_shape=(3,1)))
+          : model.add(LSTM(10,activation='relu',input_length=3,input_dim=1))
+
+          : LSTM은 기본적으로 3차원으로 데이터를 받아서 2차원으로 넘겨준다.
+          : return_sequences : 순차리턴여부 -> LSTM은 기본적으로 2차원을 전달
+          : model.add(LSTM(500, return_sequences = True))
+          : 데이터가 시계열적이면 2개가 나을 수 있다.
+          : LSTM 레이어는 출력 값 이외에, 
+            LSTM셀 사이에서 공유되는 셀의 상태(cell state)가 존재한다는 점이 특징이다.
+
+# simpleRNN : 파라미터 계산법 : output( output * dim + 1)
+                  : 기본적인 RNN 
+
+
+
+# GRU : LSTM 구조를 보다 간결하게 만든 것이다.
+         : Update Gate, Reset Gate 두가지만 존재한다.
+
+# EarlyStopping
+                      : fit()에 선언해준다.
+                      : from tensorflow.keras.callbacks import EarlyStopping
+                      : early_stopping = EarlyStopping(monitor='loss',patience=10, mode='min')
+                      : loss를 기준으로 최솟값이 10번이상 커지면 조기종료하겠다.
+                      : model.fit(x,y,epochs=10000,batch_size=1,callbacks=[early_stopping])
+                      
+
+
+keras24_LSTM_ensemble_1112.py : >>>> [85.05777]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

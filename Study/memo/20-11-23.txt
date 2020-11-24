@@ -1,0 +1,112 @@
+- 과제
+- 실습
+
+
+
+# 머신러닝 
+# SVM
+	: SVM은 분류에 사용되는 지도학습 방식의 머신러닝 모델이다.
+	: SVM은 서포트 벡터(support vectors)를 사용해서 결정 경계(Decision Boundary)를 정의하고, 
+	  분류되지 않은 점을 해당 결정 경계와 비교해서 분류하게 된다.
+	: 기존의 퍼셉트론은 가장 단순하고 빠른 분류 모형이지만 
+	  결정경계가 유일하게 존재하지 않는다.
+	: 서포트 벡터 : 클래스 사이 경계에 가깝게 위치한 데이터 포인트
+
+# LinearSVC
+	: 머신러닝모델
+	: 선형 서포트벡터 머신
+	: 다중분류에서 사용됨
+	: 각 점들의 최소한의 loss찾아 직선을 그린다.
+	: from sklearn.svm import LinearSVC
+	: model = LinearSVC()
+	: 원핫인코딩, 모델, 컴파일 하지않음
+	: result = model.score(x_test,y_test)
+	: evaluate 없음 predict는 있음
+	: model.score(x_test,y_test)
+		: evaluate 대신사용한다.	
+		: acc에 가깝다.
+		: test값을 test해본다.
+
+# SVC	
+	: 분류모델에 사용된다.
+	: from sklearn.svm import SVC
+		: 간단하게 보면 LinearSVC에서 히든이 추가됨
+# accuracy_score
+	: from sklearn.metrics import accuracy_score
+		: acc_score = accuracy_score(y_data,y_predict)
+	: 분류모델에서 사용됨
+	: y_predict값과 실제 y값을 비교한다.
+
+# 분류 => accuracy_score
+# 회귀 => r2_score
+
+# KNeighborsClassifier
+	: 분류
+	: from sklearn.neighbors import KNeighborsClassifier
+
+# KNeighborsRegressor
+	: 회귀
+	: from sklearn.neighbors import KNeighborsRegressor
+
+# RandomForestClassifier
+	: 분류
+	: from sklearn.ensemble import RandomForestClassifier
+
+# RandomForestRegressor
+	: 회귀
+	: from sklearn.ensemble import RandomForestRegressor
+
+
+Classifier : 분류모델
+Regressor : 회귀모델
+Logistic Regressor : 분류
+
+# count_data = dataset.groupby("quality")["quality"].count()
+	: quality 컬럼에 있는 개체들을 카운트 하겠다
+	: 3      20
+	: 4     163
+	: 5    1457
+	: 6    2198
+	: 7     880
+	: 8     175
+	: 9       5
+
+# to_categorical
+	: 최대값전까지 0과 1로 바꿔준다.
+	: 중간에 없는 값도 채워넣는다.
+
+# 값을 치환해보기
+	newlist = []
+	for i in list(y):
+ 	   if   i <= 4:
+  	      newlist += [0]
+   	 elif i <= 7:
+    	    newlist += [1]
+  	  else: 
+     	   newlist += [2]
+	: 리스트안에 값이 한쪽으로 치우쳐진 경우 대체값으로 치환하여 사용이 가능
+	
+# binary_crossentropy
+	: loss="binary_crossentropy"
+	
+# categorical_crossentropy
+	: loss="categorical_crossentropy"
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
