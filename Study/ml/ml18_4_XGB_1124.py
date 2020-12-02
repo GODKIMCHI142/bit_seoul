@@ -45,7 +45,7 @@ print(model.feature_importances_)
 
 # print(ii) [[0], [2], [5], [25]]
 # cumsum
-'''
+
 x = np.append(x_train, x_test, axis=0)
 x = x.reshape(x.shape[0],(x.shape[1]*x.shape[2])) # 7만, 784
 y = np.append(y_train, y_test, axis=0)
@@ -64,9 +64,9 @@ print(y.shape)# 70000, 154
 
 from sklearn.model_selection import train_test_split
 x_train, x_test , y_train  , y_test = train_test_split(x , y , train_size=0.8, random_state=1)
-'''
 
-'''
+
+
 # 시각화
 import matplotlib.pyplot as plt
 import numpy as np
@@ -80,7 +80,7 @@ def plot_feature_importance_cancer(model):
 
 plot_feature_importance_cancer(model)
 plt.show()
-'''
+
 
 
 

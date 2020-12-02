@@ -71,10 +71,10 @@ model.fit(x_train,y_train)
 acc = model.score(x_test,y_test)
 
 print("acc : ",acc)
-
+# acc :  0.8666666666666667
 
 print(model.feature_importances_)
-# acc :  0.8666666666666667
+
 
 
 

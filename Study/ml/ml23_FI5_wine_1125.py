@@ -3,7 +3,8 @@
 # 2. 하위 30% 제거
 # 3. 디폴트와 성능비교
 
-
+import pandas as pd
+import numpy as np
 
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 from sklearn.ensemble import GradientBoostingClassifier
@@ -13,9 +14,18 @@ from xgboost import XGBClassifier
 import numpy as np
 from sklearn.decomposition import PCA
 
-iris = load_iris()
+dataset = pd.read_csv("./data/csv/winequality-white.csv",header=0,index_col=None,sep=";")
 
-x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, train_size=0.7, random_state=66,shuffle=True)
+
+datasets = pd.DataFrame(dataset)
+x = datasets.iloc[:,:11]
+y = datasets.iloc[:,11]
+
+x = np.array(x)
+y = np.array(y)
+
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x,y, train_size=0.7, random_state=66,shuffle=True)
 
 print(x_train.shape)
 
@@ -26,13 +36,13 @@ model.fit(x_train,y_train)
 acc = model.score(x_test,y_test)
 
 print("acc : ",acc)
-# acc :  0.9111111111111111
+# acc :  0.6278911564625851
 
 print(model.feature_importances_)
 
 
 ii = []
-for i in range(iris.data.shape[1]):
+for i in range(x.shape[1]):
     if model.feature_importances_[i] == 0:
         print(i,"번째 컬럼은 0")
         ii.append(i)
@@ -74,7 +84,7 @@ print("acc : ",acc)
 
 
 print(model.feature_importances_)
-# acc :  0.8666666666666667
+# acc :  0.5496598639455782
 
 
 

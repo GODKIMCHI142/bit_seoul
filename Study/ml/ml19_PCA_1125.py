@@ -8,7 +8,7 @@ y = datasets.target # 442,
 
 pca = PCA(n_components=5)
 x = pca.fit_transform(x)
-print(x.shape) # 442, 9
+print(x.shape) # 442, 5
 
 pca_EVR = pca.explained_variance_ratio_
 print(pca_EVR)
