@@ -38,20 +38,24 @@ from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler()
 scaler.fit(samsung_x)
 
+
 # bit
 from sklearn.preprocessing import MinMaxScaler
 scaler2 = MinMaxScaler()
 scaler2.fit(bit_x)
+
 
 # gold
 from sklearn.preprocessing import MinMaxScaler
 scaler3 = MinMaxScaler()
 scaler3.fit(gold_x)
 
+
 # kosdaq
 from sklearn.preprocessing import MinMaxScaler
 scaler4 = MinMaxScaler()
 scaler4.fit(kosdaq_x)
+
 
 
 # transform

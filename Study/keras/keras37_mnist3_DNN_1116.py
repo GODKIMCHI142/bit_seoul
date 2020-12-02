@@ -42,8 +42,11 @@ model.add(Dense(10,activation='softmax'))
 
 
 # 3. 컴파일, 훈련
+from tensorflow.keras.callbacks import EarlyStopping
+es = EarlyStopping(monitor='loss',patience=100, mode='auto')
+
 model.compile(loss='categorical_crossentropy',optimizer='adam',metrics='accuracy')
-model.fit(x_train,y_train,epochs=30,validation_split=0.2)
+model.fit(x_train,y_train,epochs=1000,validation_split=0.2,callbacks=[es])
 
 # 4. 평가, 예측
 
