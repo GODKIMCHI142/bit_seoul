@@ -14,7 +14,7 @@ loan_LD = loan_dataset["loan_default"]  # loan_default
 #     loan_DD.iloc[i] = loan_DD.iloc[i][-2:]+loan_DD.iloc[i][3:5]+loan_DD.iloc[i][0:2]
 # for i in range(len(loan_DD)):
 #     loan_DD[i] = loan_DD[i][-2:]+loan_DD[i][3:5]+loan_DD[i][0:2]
-# dd3 = loan_dataset["loan_default"].groupby(loan_DD).mean()
+dd3 = loan_dataset["loan_default"].groupby(loan_DD).mean()
 # print(dd3)
 
 
@@ -32,7 +32,7 @@ print(bse_2018.loc["1-August-2018"]["Close"]) # 37521.62
 #         bse_d.iloc[i] = "1810"    
 # print(bse_d)
 
-# bse_c = bse_2018["Close"] 
+bse_c = bse_2018["Close"] 
 # print(bse_c)
 
 # date_close = []
@@ -50,19 +50,19 @@ print(bse_2018.loc["1-August-2018"]["Close"]) # 37521.62
 
 # 시각화
 import matplotlib.pyplot as plt
-# plt.figure(figsize=(10,6)) # 단위 무엇인지 찾아볼것
-# plt.subplot(2,1,1)         # 2행 1열 중 첫번째
-# plt.plot(dd3,marker='.',c='red',label='loan_default')
-# plt.grid() # 모눈종이 모양으로 하겠다.
+plt.figure(figsize=(10,6)) # 단위 무엇인지 찾아볼것
+plt.subplot(2,1,1)         # 2행 1열 중 첫번째
+plt.plot(dd3,marker='.',c='red',label='loan_default')
+plt.grid() # 모눈종이 모양으로 하겠다.
 
-# plt.title('1')
-# plt.ylabel('AV')
-# plt.xlabel('date')
-# plt.legend(loc='upper left')
+plt.title('1')
+plt.ylabel('AV')
+plt.xlabel('date')
+plt.legend(loc='upper left')
 
-# plt.subplot(2,1,2)         # 2행 1열 중 두번째
-# plt.plot(bse_c,marker='.',c='blue',label="close")
-# plt.grid() # 모눈종이 모양으로 하겠다.
+plt.subplot(2,1,2)         # 2행 1열 중 두번째
+plt.plot(bse_c,marker='.',c='blue',label="close")
+plt.grid() # 모눈종이 모양으로 하겠다.
 
 # plt.title('2')
 # plt.ylabel('bse')
@@ -74,7 +74,7 @@ import matplotlib.pyplot as plt
 # plt.bar(index,dd)
 # plt.title("LOAN DEFAULT")
 # plt.xticks(index,label)
-# plt.show()
+plt.show()
 
 '''
 # summarize history for accuracy

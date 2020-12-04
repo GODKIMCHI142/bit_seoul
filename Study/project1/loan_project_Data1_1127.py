@@ -5,7 +5,7 @@ import seaborn as sns
 
 # dataset     = pd.read_csv("./data/csv/test.csv",header=0,index_col=None,sep=",")
 dataset     = pd.read_csv("./data/csv/train.csv",header=0,index_col=None,sep=",")
-dataset     = dataset.columns=dataset.columns.str.replace('.','_')
+# dataset.columns=dataset.columns.str.replace('.','_')
 BSE_dataset = pd.read_csv("./data/csv/BSE_SENSEX_5Y.csv",header=0,index_col=0,sep=",")
 
 # 상관관계를 히트맵으로 표현한다.
@@ -81,21 +81,25 @@ BSE_dataset = pd.read_csv("./data/csv/BSE_SENSEX_5Y.csv",header=0,index_col=0,se
 #         loan_ET.iloc[i] = 2
 # # print(loan_ET[:100])
 
-# loan_DD = dataset["DisbursalDate"] 
-# for i in range(len(loan_DD)):
-#     loan_DD.iloc[i] = loan_DD.iloc[i][-2:]+loan_DD.iloc[i][3:5]+loan_DD.iloc[i][0:2]
+loan_DD = dataset["DisbursalDate"] 
+for i in range(len(loan_DD)):
+    loan_DD.iloc[i] = int(loan_DD.iloc[i][-2:]+loan_DD.iloc[i][3:5]+loan_DD.iloc[i][0:2])
+    
+print(loan_DD.sort_values())
 
-# bse_2018  = BSE_dataset.loc["1-August-2018":"31-October-2018"] 
+bse_2018  = BSE_dataset.loc["1-August-2018":"31-October-2018"] 
 # BSE = ""
-
+loan_DOB= []
 # loan_x = []
-# for i in range(len(loan_DOB)):
-#     if loan_DD[i][2:4] == "08":
-#         BSE = bse_2018.loc["31-August-2018"]["Close"]
-#     elif loan_DD[i][2:4] == "09":
-#         BSE = bse_2018.loc["28-September-2018"]["Close"]
-#     else :
-#         BSE = bse_2018.loc["31-October-2018"]["Close"]
+
+for i in range(len(loan_DOB)):
+    if loan_DD[i][2:4] == "08":
+        BSE = bse_2018.loc["31-August-2018"]["Close"]
+    elif loan_DD[i][2:4] == "09":
+        BSE = bse_2018.loc["28-September-2018"]["Close"]
+    else :
+        BSE = bse_2018.loc["31-October-2018"]["Close"]
+        
 #     loan_x.append([
 #         loan_DA[i],  loan_AC[i],   loan_LTV[i],  loan_DOB[i], loan_ET[i],
 #         loan_MAF[i], loan_AF[i],   loan_PF[i],   loan_VF[i],  loan_PAF[i],

@@ -24,7 +24,7 @@ x_train, x_test, y_train, y_test = train_test_split(x,y, train_size=0.8, random_
 
 parameters2 = [
     {
-    "svm__learning_rate" : [0.05, 0.06, 0.07, 0.08, 0.09],
+    "svm__learning_rate" : [0.01, 0.02, 0.03],
     "svm__n_estimators" : [200, 300, 400, 500],
     "svm__max_depth" : [6,8,10],
     "svm__colsample_bytree" : [0.6, 0.7, 0.8],
@@ -96,7 +96,7 @@ model = RandomizedSearchCV(pipe,parameters2,cv=3,verbose=2)
 model.fit(x_train,y_train)
 
 acc = model.score(x_test,y_test)
-print("acc : ",acc) # acc :  0.7829340996332912
+print("acc : ",acc) # 
 
 model = model.best_estimator_
 
@@ -112,21 +112,23 @@ model = model.best_estimator_
 
 y_predict = model.predict(x_test)
 
+acc = model.score(x_test,y_test)
+print("acc : ",acc) # 
 print(y_predict.shape) # (112392,)
 
-df = pd.DataFrame(y_predict, index=None, columns=["loan_default"])
-print(df)
+# df = pd.DataFrame(y_predict, index=None, columns=["loan_default"])
+# print(df)
 
-dd = df.groupby("loan_default")["loan_default"].count()
-print(dd)
-# 0    111706
-# 1       686
-index = np.arange(len(dd))
-label = ['0', '1']
-plt.bar(index,dd)
-plt.title("LOAN DEFAULT")
-plt.xticks(index,label)
-plt.show()
+# dd = df.groupby("loan_default")["loan_default"].count()
+# print(dd)
+# # 0    111706
+# # 1       686
+# index = np.arange(len(dd))
+# label = ['0', '1']
+# plt.bar(index,dd)
+# plt.title("LOAN DEFAULT")
+# plt.xticks(index,label)
+# plt.show()
 
 
 
