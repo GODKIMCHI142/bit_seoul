@@ -1,0 +1,70 @@
+
+
+- 과제
+- 실습
+
+# Bidirectional
+	: 양방향
+	: model.add(Bidirectional(LSTM(16)))
+		: LSTM 파람개수의 2배
+		: 그 다음층의 파람개수에도 영향을 준다
+
+
+# ml의 evaluate
+	: model.fit에서 사용한다.
+	: verbose=True
+	: eval_metric
+		: 리스트로 묶어서 여러개를 사용할 수 있다.
+		rmse: 루트 평균 제곱 오차
+		mae: 평균 절대 오차
+		logloss: 음의 로그 기록
+		error: 이진 분류 오류율(0.5 임계값)
+		merror: 다중분류 오류율
+		mlogloss: 멀티클라스 로그 손실
+		auc: auc곡선 아래의 면적
+	: eval_set
+		: [(x_train,y_train),(x_test,y_test)]
+			: train과 test모두 확인할 수 있다.
+
+	: Early Stopping
+		: early_stopping_rounds=20
+		: 평가지표를 기준
+
+
+
+# 데이터 전처리
+	: 이상치 기준
+		: 무엇을 위한 데이터인지 생각
+		: 전체 데이터의 백분위의 25퍼 75퍼 로 자르고 
+		: 위아래 뺀 값의 1.5배
+
+
+# outliers
+	: np.where() 
+		: 비교후 인덱스 반환
+	: np.percentile() 
+		: data의 interpolation으로 데이터를 자른 value를 반환
+		: 값들을 정렬해준다.
+		: interpolation
+			: linear
+				: 백분위
+				:  i + (j - i) * fraction (기본값)
+			: nearest 
+				: liner의 가장 가까운 진짜 값
+			: lower 
+				: 백분위보다 낮은 값 중 제일큰 값 
+			: higher 
+				: 백분위보다 큰값 중 제일낮은 값
+			: midpoint 
+				: linear로 나온 앞뒤값의 평균값.
+
+
+
+
+
+
+
+
+
+
+

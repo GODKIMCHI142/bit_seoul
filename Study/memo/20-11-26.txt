@@ -1,0 +1,47 @@
+프로젝트발표 화요일 오전
+pt해야함
+원천기술 기술해야함
+
+- 과제
+- 실습
+
+
+# SelectFromModel
+	: from sklearn.feature_selection import SelectFromModel
+	: 특성중요도를 평가한다.
+
+	: thresholds
+		: np.sort(model.feature_importances_)
+		: 피쳐의 중요도를 평가한다.
+# ImageDataGenerator
+	: from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

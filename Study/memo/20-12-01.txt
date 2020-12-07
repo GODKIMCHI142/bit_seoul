@@ -1,0 +1,143 @@
+
+# 데이터 분석
+	: data[i].nunique()
+		: i 인덱스 일때 컬럼의 유니크값의 갯수
+
+	: data[i].unique()
+		: i 인덱스 일때 컬럼의 유니크값
+
+	: data[i].value_counts()
+		: value가 몇 개 있는지 확인해주는 메서드
+
+	: data.describe()
+		: 수치형 데이터 통계값 보여줌
+
+	: pandas.isna()
+		: 결측치인지 아닌지 트루 폴스로 반환한다.
+
+	: train.isna().sum()
+		: train dataset에 결측치 갯수를 반환한다.
+
+	: round(100*(train.isna().sum())/len(train), 2)
+		: train dataset에 결측값 퍼센트를 구한다.
+
+	: data.corr()['loan_default'].sort_values(ascending = False)
+		: data를 상관관계로 하여 
+		  loan_default 기준으로 내림차순한 밸류를 정렬한다.
+
+	: data.columns
+		: data에 있는 모든 컬럼명을 가져온다.
+
+	: dataset.columns = data.columns.str.replace('.','_')
+		: 컬럼명의 . 을 _ 로 바꾼다.
+위도 + 경도 = ?
+
+# Seaborn
+	: Matplotlib를 기반으로한 통계용 차트 등의 기능을 추가한 시각화 패키지
+	: heatmap
+		: 데이터들의 배열을 색상으로 표현해주는 그래프
+	: sns.heatmap(data.corr())
+		: 히트맵을 만들겠다.
+		: corr()
+			: data들을 상관관계로 해석하겠다
+	: countplot()
+		: 범주형 변수의 빈도수를 시각화
+	
+
+# sort_values()
+	: DataFrame.sort_values()
+	: value를 정렬한다.
+	: parameters
+		: by=None
+			: 정렬할 기준 변수
+		: ascending=True
+			: True : 오름차순, False : 내림차순
+		: inplace=False 
+			: DataFrame 자체를 정렬해서 저장
+		: kind='quicksort'
+			: 정렬 알고리즘
+		: na_position
+			: 결측값 위치
+
+
+# Pearson Correlation Coefficient
+	: 피어슨 상관계수
+
+
+
+# apply
+	
+
+count()	각 컬럼의 개체수
+sum()	값의 합계
+mean()	값의 평균 값 리턴
+median()	값의 중간 값 리턴
+mode()	최빈수 구하기
+std()	값들의 표준편차 리턴
+min()	값의 최소값 리턴
+max()	값의 최대값 리턴
+abs()	절대값 
+prod()	값의 곱셈값 표현
+cumsum()	Row기반으로 누적합 표현
+cumprod()	Row기반으로 누적곱셈 표현
+describe()	데이터에 대한 요약 리턴
+
+
+# 지니계수
+	: 인구의 누적비율과 소득의 누적 점유율 사이의 상관관계
+	: x축 : 저소득층의 누적분배율,           인구분포
+	: y축 : 벌어들인 수입의 누적된 지분,   소득분포 
+
+# skit-learn metrics
+	: accuracy_score 
+		: 정확도를 계산합니다.
+		: 정확히 일치 해야합니다 .
+		: y_true, y_pred
+
+	: precision_score(정밀도)
+		: 예측한 것중에 정답의 비율은?
+		: positive 중 실제 TrueP 값
+		: TP / Positive = TP / (FP + TP)
+		: 0,1 - 1,1
+
+	: recall_score(재현율)
+		: 찾아야 할 것중에 실제로 찾은 비율은?
+		: TP  / ( True)  = TP / (FN + TP)
+		: True일때 TP의 비율
+
+	: f1_score
+		: 정밀도와 재현율의 평균
+		: 정밀도와 재현율의 조화 평균
+		: 한쪽으로 치우치면 F1 Score의 값이 낮게 나옵니다.
+		: 2 * (preci + recall) / (preci + recall)
+
+	: roc_auc_score
+		: 
+
+confusion_matrix
+	: roc_curve
+		: (False Positive Rate)이 변할 때 
+		  (True Positive Rate) 이 어떻게 변하는지 나타낸다.
+		: TPR : (True Positive Rate) : recall_score
+		: FPR : FPR = FP / (FP + TN)
+	: Threshold ( 임계값 )
+		: 재현율 = (예측 true / 실제 true) = TP / (TP + FN)
+
+# ROC AUC
+fpr, tpr, threshold
+	: auc
+		: ROC 커브의 아래 면적을 의미합니다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -95,7 +95,7 @@ SVC() : C, 커널, 감마 라는 파라미터가 있다.
 	: Terminal Node 혹은 Leaf Node : 결정값, 마지막노드
 	: model.feature_importances_
 		: 컬럼(피쳐,특성)의 중요도
-		: min_samples_split
+	: min_samples_split
 		: 노드를 분할하기 위한 최소한의 샘플 데이터수
 		: 작게 설정할 수록 분할 노드가 많아져 과적합 가능성 증가
 		: 과적합을 제어하는데 사용

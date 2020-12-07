@@ -1,0 +1,88 @@
+- 과제
+- 실습 
+
+
+
+# 비지도학습
+	: y값을 주지않고 몇개로 구분할 것인지만 알려준다.
+
+# PCA
+	: from sklearn.decomposition import PCA
+	: Principal Component Analysis
+	: 모든 속성에서 가장 중요한 방향(주성분)을 찾아 나가는 것
+	: 전체 데이터에서 가장 분산이 큰 방향 을 찾는 것
+	: 차원 축소 방법
+	: y가 없다.
+	: n_components 
+		: pca = PCA(n_components=5)
+		: 차원을 축소해준다.
+		: x2d = pca.fit_transform(x)
+		: print(x2d.shape) # 442, 5
+	: pca_EVR = pca.explained_variance_ratio_
+		: [0.40242142 0.14923182 0.12059623 0.09554764 0.06621856]
+		: 축소되고 남은 차원들의 컬럼 중요도를 나타내준다.
+		: 빠진 컬럼들은 버린다.
+	: 차원축소가 항상 좋은것은 아니다.
+	
+
+# feature_importance_
+
+
+# XGBRegressor
+	: max_depth
+		: 트리의 최대 깊이
+		: 완벽하게 클래스 값이 결정될 때 까지 분할
+		: 또는 데이터 개수가 min_samples_split보다 작아질 때까지 분할
+		: 깊이가 깊어지면 과적합될 수 있으므로 적절히 제어 필요
+	: learning_rate
+		: 이전 트리의 오차를 얼마나 강하게 보정할 것인가를 제어
+		: rate를 높이면 보정을 강하게 하기 때문에 복잡한 모델을 만듬
+	n_estimators
+		: 결정트리의 갯수를 지정
+	n_jobs
+		: cpu코어 병렬 활용 수
+		: -1 == 모든 코어
+	colsample_bylevel
+		: 각 수준에 대한 열의 하위 표본 비율입니다.
+		  서브 샘플링은 트리에 도달 한 
+		  모든 새 깊이 수준에 대해 한 번씩 발생합니다.
+		  열은 현재 트리에 대해 선택한 열 집합에서 하위 샘플링됩니다.
+	colsample_bytree
+		: 각 트리를 구성 할 때 열의 하위 표본 비율입니다. 
+		  서브 샘플링은 구성된 모든 트리에 대해 한 번 발생합니다.
+  
+
+# plot_importance
+	: XGBoost에서 제공하는 plot
+	: plot_importance(model)
+	  plt.show()
+	: pipeline이나 CV를 사용하면 안된다.
+
+
+print(aa, end='\n\n')
+print(np.delete(aa, 1), end='\n\n') # 0행 1열 값을 지움
+print(np.delete(aa, 1, axis = 0), end='\n\n') # 1행을 지움
+print(np.delete(aa, 1, axis = 1), end='\n\n') # 1열을 지움
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

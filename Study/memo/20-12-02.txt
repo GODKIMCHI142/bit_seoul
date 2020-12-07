@@ -1,0 +1,81 @@
+
+
+과제 - 
+
+
+
+
+# KerasClassifier, KerasRegressor
+	: 케라스모델을 사이킷런으로 엮어준다.
+
+# np.linspace
+	: 숫자로된 시퀀스 생성 툴
+	: np.linspace(start=0, stop=100,num=5)
+	: array([0. 25. 50. 75. 100])
+
+
+# learning_rate
+	: optimizer에서 사용
+	: 스텝사이즈
+
+# optimizer
+	: Adam
+		: 
+	: Adaelta
+		: 
+	: Adagrad
+		:
+	: Adamax
+		:
+	: RMSprop
+		:
+	: SGD
+		:
+	: Nadam
+		: 
+
+# np.exp()
+
+# np.tanh()
+	: np.tanh(x)
+		: tanh 그래프
+
+# np.maximum()
+	: np.maximum(0,x)
+		: relu
+		: 0이하는 0
+
+# relu, selu, elu, gelu, leaky relu
+
+# kernerl_regularizer
+	: 가중치에 페널티를 준다.
+	: regularizer.l1
+		: 절대값 페널티
+	: regularizer.l2
+		: 제곱값 페널티
+	
+# kernel_initializer
+	: he_normal
+		: 
+
+
+# Batch_normalization
+	: 
+
+# Gradient Vanishing / Exploding
+	:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

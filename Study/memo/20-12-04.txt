@@ -1,0 +1,101 @@
+
+
+- 과제 : keras77 완성
+
+
+
+# Reduce_LR
+	: from tensorflow.keras.callbacks import ReduceLROnPlateau
+	: ReduceLROnPlateau(monitor="val_loss",patience=3,factor=0.5,verbose=1)
+	: loss가 개선이 없으면 LR을 50퍼센트씩 감축
+
+
+
+# 전이학습
+	: 남이 만든 모델+가중치까지 가져다가 쓴다.
+	: 가중치를 가져와서 일부는 훈련을 시킨다.
+
+
+# VGG16
+	: from tensorflow.keras.applications import VGG16
+	: model = VGG16()
+	: include_top
+		: True : 기본모델에 인풋쉐입을 사용하겠다
+		: False : 인풋쉐입을 따로 정의하겠다.
+	: model.trainable=False
+		: 새롭게 더 훈련시키지 않겠다.
+		: 가중치 조절안함
+
+# BatchNormalization
+	: 가중치 연산을 한다.
+
+
+# Dropout
+	: 가중치 연산을 안한다.
+
+
+# Activation
+	: 가중치 연산 안한다.
+
+
+# preprocess_input
+	: (RGB) -> BGR
+
+
+
+
+
+# load_img
+
+
+# Tokenizer
+	: from tensorflow.keras.preprocessing.text import Tokenizer
+
+
+# embedding
+	: from tensorflow.keras.layers import Embedding
+	: embedding layer를 통과
+	: 상관관계를 계산 -> 벡터화 	
+	: model.add(Embedding(25,10,input_length=5))
+		: 첫번째 숫자는 단어사전안에 단어의 개수
+			: word_size
+			: 단어개수 보다 작은값을 넣으면 터진다.
+		: 두번쨰 숫자는 아웃풋 노드의 갯수
+		: input_length
+			: input_shape
+			: 지정해주지 않아도 된다.
+			: shape 맞춰주는 것이 좋다.
+
+# pad_sequences
+	: from tensorflow.keras.preprocessing.sequence import pad_sequences
+	: x = pad_sequences(x,padding="pre",maxlen=500)
+	: padding
+		: 0채워주기
+			: pre 앞쪽에, post 뒤쪽에
+		: maxlen
+			: 컬럼길이 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
