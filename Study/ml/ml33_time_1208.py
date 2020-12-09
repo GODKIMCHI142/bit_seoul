@@ -54,6 +54,10 @@ print(thresholds)
 
 n  = 0
 r2 = 0
+
+import time
+start1 = time.time()
+
 for thresh in thresholds:
     selection = SelectFromModel(model, threshold=thresh, prefit=True)
 
@@ -65,14 +69,36 @@ for thresh in thresholds:
     y_predict = selection_model.predict(select_x_test)
 
     score = r2_score(y_test, y_predict)
-    if score*100.0 > r2:
-        n = select_x_train.shape[1]
-        r2 = score*100.0
-        L_selection = selection
-        print("Thresh=%.3f, n=%d, R2: %.2f%%"%(thresh,select_x_train.shape[1],score*100.0))
+    # if score*100.0 > r2:
+    #     n = select_x_train.shape[1]
+    #     r2 = score*100.0
+    #     L_selection = selection
+    #     print("Thresh=%.3f, n=%d, R2: %.2f%%"%(thresh,select_x_train.shape[1],score*100.0))
     
+start2 = time.time()
 
+for thresh in thresholds:
+    selection = SelectFromModel(model, threshold=thresh, prefit=True)
 
+    select_x_train = selection.transform(x_train)
+    selection_model = XGBRegressor(n_jobs=1)
+    selection_model.fit(select_x_train,y_train)
+
+    select_x_test = selection.transform(x_test)
+    y_predict = selection_model.predict(select_x_test)
+
+    score = r2_score(y_test, y_predict)
+    # if score*100.0 > r2:
+    #     n = select_x_train.shape[1]
+    #     r2 = score*100.0
+    #     L_selection = selection
+    #     print("Thresh=%.3f, n=%d, R2: %.2f%%"%(thresh,select_x_train.shape[1],score*100.0))
+end2 = time.time()
+end = start2 - start1
+print("start1 : ",end)
+print("start2 ",end2-start2) 
+
+'''
 x_train = L_selection.transform(x_train)
 x_test = L_selection.transform(x_test)
 
@@ -122,6 +148,26 @@ print(thresholds)
 # 최종 정답률     :  0.9103265848524855
 # [0.00561222 0.0121988  0.02149129 0.02638417 0.02788421 0.05868933
 #  0.06518003 0.0655624  0.0738856  0.11177695 0.23410691 0.29722813]
+
+'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
